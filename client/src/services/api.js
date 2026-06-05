@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const api = axios.create({ baseURL: '/api' });
+// Development: Vite proxy handles '/api' → localhost:4000
+// Production:  VITE_API_URL = https://your-backend.railway.app/api
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || '/api'
+});
 
 export const uploadPDF = (file, onProgress) => {
   const form = new FormData();

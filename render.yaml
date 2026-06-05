@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: pdf-mcq-quiz-backend
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: FRONTEND_URL
+        sync: false   # manually set this to your Vercel URL after deploy
