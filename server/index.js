@@ -6,22 +6,7 @@ const apiRoutes = require('./routes/api');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  process.env.FRONTEND_URL   // Render env: https://randomexam.vercel.app
-].filter(Boolean);
-
-app.use(cors({
-  origin: (origin, cb) => {
-    // no origin = server-to-server / curl / health checks
-    if (!origin) return cb(null, true);
-    if (allowedOrigins.some(o => origin.startsWith(o))) return cb(null, true);
-    // reject silently — don't throw, return false so cors sends proper 403
-    cb(null, false);
-  },
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
